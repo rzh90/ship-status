@@ -5,7 +5,15 @@ export default {
         "./src/**/*.{html,js,svelte,ts}"
     ],
     theme: {
-        extend: {},
+        colors: {
+            "ssgreen": "#629a40"
+        },
+        extend: {
+            fontFamily: {
+                "sans": "Inter, Helvetica, Arial, sans-serif",
+                "logo": "Alumni Sans"
+            }
+        },
     },
     plugins: [],
 }
