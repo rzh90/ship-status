@@ -6,7 +6,10 @@
 <script>
     import { invalidate } from "$app/navigation"
     import { onMount } from "svelte"
-    import "../app.css"
+    
+    import "@skeletonlabs/skeleton/themes/theme-crimson.css"
+    import "@skeletonlabs/skeleton/styles/skeleton.css"
+    import "../app.postcss"
 
     export let data
 

@@ -2,15 +2,15 @@
 const colors = require("tailwindcss/colors")
 
 export default {
+    darkMode: "class",
     content: [
-        "./src/**/*.{html,js,svelte,ts}"
+        "./src/**/*.{html,js,svelte,ts}",
+        require('path').join(require.resolve(
+            "@skeletonlabs/skeleton"),
+            "../**/*.{html,js,svelte,ts}"
+        )
     ],
     theme: {
-        colors: {
-            ...colors,
-            "ssgreen": "#629a40",
-            "ssdarkgreen": "#344731"
-        },
         extend: {
             fontFamily: {
                 "sans": "Inter, Helvetica, Arial, sans-serif",
@@ -18,6 +18,9 @@ export default {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/forms'),
+        ...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')()
+    ],
 }
 
