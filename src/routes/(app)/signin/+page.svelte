@@ -39,7 +39,7 @@
             </label>
 
             <div>
-                <button disabled={loading} class="btn variant-filled">Sign in</button>
+                <button disabled={loading} class="btn variant-filled-primary">Sign in</button>
             </div>
         </form>
 

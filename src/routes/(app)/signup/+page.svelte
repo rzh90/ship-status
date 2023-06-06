@@ -37,7 +37,7 @@
                 </label>
 
                 <div>
-                    <button disabled={loading} class="btn variant-filled">Sign up</button>
+                    <button disabled={loading} class="btn variant-filled-primary">Sign up</button>
                 </div>
             </form>
 

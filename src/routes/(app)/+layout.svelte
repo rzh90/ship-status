@@ -29,10 +29,10 @@
         <Nav>
             {#if $page.data.session}
                 <form action="/logout" method="post" use:enhance={handleLogout}>
-                    <button class="text-white hover:text-ssgreen" disabled={loading} type="submit">Sign out</button>
+                    <button class="btn btn-sm variant-filled-primary" disabled={loading} type="submit">Sign out</button>
                 </form>
             {:else}
-                <a href="/signin" class="text-white hover:text-ssgreen">Sign in</a>
+                <a href="/signin" class="btn btn-sm variant-filled-primary">Sign in</a>
             {/if}
         </Nav>
     </div>
