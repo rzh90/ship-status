@@ -24,15 +24,19 @@
     <title>Ship Status</title>
 </svelte:head>
 
-<Nav>
-    {#if $page.data.session}
-        <form action="/logout" method="post" use:enhance={handleLogout}>
-            <button class="text-white hover:text-ssgreen" disabled={loading} type="submit">Sign out</button>
-        </form>
-    {:else}
-        <a href="/signin" class="text-white hover:text-ssgreen">Sign in</a>
-    {/if}
-</Nav>
+<header class="bg-ssdarkgreen p-2">
+    <div class="mx-auto max-w-screen-xl"> <!-- wrapper -->
+        <Nav>
+            {#if $page.data.session}
+                <form action="/logout" method="post" use:enhance={handleLogout}>
+                    <button class="text-white hover:text-ssgreen" disabled={loading} type="submit">Sign out</button>
+                </form>
+            {:else}
+                <a href="/signin" class="text-white hover:text-ssgreen">Sign in</a>
+            {/if}
+        </Nav>
+    </div>
+</header>
 
 <main>
     <slot />
