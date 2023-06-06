@@ -1,4 +1,5 @@
 /** @type {import("tailwindcss").Config} */
+const colors = require("tailwindcss/colors")
 
 export default {
     content: [
@@ -6,7 +7,9 @@ export default {
     ],
     theme: {
         colors: {
-            "ssgreen": "#629a40"
+            ...colors,
+            "ssgreen": "#629a40",
+            "ssdarkgreen": "#344731"
         },
         extend: {
             fontFamily: {

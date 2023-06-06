@@ -3,6 +3,8 @@
     import { invalidate } from "$app/navigation"
     import { page } from "$app/stores"
 
+    import Nav from "$lib/Nav.svelte"
+
     let loading = false
 
     const handleLogout = () => {
@@ -19,22 +21,19 @@
 </script>
 
 <svelte:head>
-    <title>Email and Password Demo - Supabase Auth Helpers</title>
+    <title>Ship Status</title>
 </svelte:head>
 
-<main class="container is-max-desktop">
-    <div class="navbar-menu my-4">
-        <div class="navbar-start">
-            <a class="my-2" href="/">Supabase Auth Helpers Demo</a>
-        </div>
-        <div class="navbar-end">
-            {#if $page.data.session}
-                <form action="/logout" method="post" use:enhance={handleLogout}>
-                    <button disabled={loading} type="submit">Sign out</button>
-                </form>
-            {/if}
-        </div>
-    </div>
+<Nav>
+    {#if $page.data.session}
+        <form action="/logout" method="post" use:enhance={handleLogout}>
+            <button class="text-white hover:text-ssgreen" disabled={loading} type="submit">Sign out</button>
+        </form>
+    {:else}
+        <a href="/signin" class="text-white hover:text-ssgreen">Sign in</a>
+    {/if}
+</Nav>
 
+<main>
     <slot />
 </main>
