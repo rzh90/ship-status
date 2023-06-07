@@ -2,7 +2,7 @@
     import { IconFileDescription, IconCalendar, IconCheck, IconBrandGithubFilled } from "@tabler/icons-svelte"
 	const features = [
 		{
-			title: "Documents",
+			title: "Shipment documents",
 			description: "Check when the commercial invoice, packing list, or FCR is received.",
 			icon: IconFileDescription
 		},
@@ -20,16 +20,15 @@
 </script>
 
 <section class="container mx-auto text-left p-4 md:text-center">
-    <div class="relative z-[1] space-y-6 pt-32 pb-24">
+    <div class="relative z-[1] space-y-6 pt-28 pb-24">
         <div class="font-bold text-4xl tracking-tight">
-            Track <span class="text-primary-500">Free on Board (FOB)</span> shipments for all accounts
+            Track <span class="text-primary-500">Free on Board (FOB)</span> shipments from start to finish
         </div>
         <p class="max-w-lg opacity-70 md:mx-auto">
-            Check the status of any FOB shipment and see when they arrive.
+            Check the status of any FOB shipment to determine when it will arrive and when to send the invoice for payment.
         </p>
         <div class="flex flex-wrap gap-3 md:space-x-3 md:block">
-            <a href="#features" class="btn md:btn-lg w-full md:w-fit variant-ringed-surface">Features</a>
-            <a href="/signin" class="btn md:btn-lg w-full md:w-fit variant-filled-primary">Get started</a>
+            <a href="/signin" class="btn md:btn-lg w-full md:w-fit variant-ghost-primary">Get started</a>
         </div>
     </div>
 </section>
@@ -37,7 +36,7 @@
 <section class="container mx-auto max-w-screen-lg mb-24" id="features">
     <div class="text-center space-y-4">
         <span class="badge variant-filled-primary uppercase">Features</span>
-        <div class="text-xl md:text-3xl font-bold">Integrate effortlessly with any retailer</div>
+        <div class="text-xl md:text-3xl font-bold">Integrate effortlessly with any account</div>
         <p class="max-w-xl opacity-60 mx-auto after:mx-auto after:mt-3 after:bg-primary-500 after:w-12 after:h-0.5 after:block">
             Track shipments for Burlington, Costco, Meijer, and more.
         </p>
@@ -60,6 +59,6 @@
 <footer class="container mx-auto max-w-screen-xl p-6">
     <div class="flex items-center justify-between">
         <p class="text-sm">&copy; 2023 Ship Status. All rights reserved.</p>
-        <a href="/"><IconBrandGithubFilled /></a>
+        <a href="https://github.com/rzh90/ship-status"><IconBrandGithubFilled /></a>
     </div>
 </footer>
