@@ -10,10 +10,6 @@ export const actions = {
         const customerpo = formData.get("customerpo")
         const user = session.user.id
 
-        console.log("ADD button clicked")
-        console.log(formData)
-        console.log(user)
-
         const {data, error} = await supabase
                                 .from("orders")
                                 .insert({po, customerpo, user})
