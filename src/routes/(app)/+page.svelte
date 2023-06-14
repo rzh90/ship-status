@@ -19,7 +19,7 @@
 	]
 </script>
 
-<section class="container mx-auto text-left p-4 md:text-center">
+<section class="text-left p-4 md:text-center">
     <div class="relative z-[1] space-y-6 pt-28 pb-24">
         <div class="font-bold text-4xl tracking-tight">
             Track <span class="text-primary-500">Free on Board (FOB)</span> shipments from start to finish
@@ -33,7 +33,7 @@
     </div>
 </section>
 
-<section class="container mx-auto max-w-screen-lg mb-24" id="features">
+<section class="mb-24" id="features">
     <div class="text-center space-y-4">
         <span class="badge variant-filled-primary uppercase">Features</span>
         <div class="text-xl md:text-3xl font-bold">Integrate effortlessly with any account</div>
@@ -56,7 +56,7 @@
     </div>
 </section>
 
-<footer class="container mx-auto max-w-screen-xl p-6">
+<footer>
     <div class="flex items-center justify-between">
         <p class="text-sm">&copy; 2023 Ship Status. All rights reserved.</p>
         <a href="https://github.com/rzh90/ship-status"><IconBrandGithubFilled /></a>

@@ -11,9 +11,9 @@ export const actions = {
         const user = session.user.id
 
         const {data, error} = await supabase
-                                .from("orders")
-                                .insert({po, customerpo, user})
-                                .select()
+                                        .from("orders")
+                                        .insert({po, customerpo, user})
+                                        .select()
 
         console.log("Order added")
 

@@ -8,12 +8,37 @@
     $: ({ testTable, user } = data)
 </script>
 
-<div class="block">
-    <p>Protected content for {user.email}</p>
-    <p>server-side fetched data with RLS:</p>
-    <pre>{JSON.stringify(testTable, null, 2)}</pre>
-</div>
-<div class="block">
-    <p>user:</p>
-    <pre>{JSON.stringify(user, null, 2)}</pre>
+<p>Hi {user.email}</p>
+
+<div class="table-container mt-6">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>PO</th>
+                <th>Customer PO</th>
+                <th>Ship Date</th>
+                <th>ETD</th>
+                <th>ETA</th>
+                <th>Ship Docs</th>
+                <th>Received</th>
+                <th>Invoiced</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each testTable as order}
+                <tr>
+                    <td>{order.po}</td>
+                    <td>{order.customerpo}</td>
+                    <td>{#if order.ship_date} {order.ship_date} {/if}</td>
+                    <td>{#if order.etd} {order.etd} {/if}</td>
+                    <td>{#if order.eta} {order.eta} {/if}</td>
+                    <td>{#if order.ship_docs} {order.ship_docs} {/if}</td>
+                    <td>{#if order.received} Yes {:else} No {/if}</td>
+                    <td>{#if order.invoiced} Yes {:else} No {/if}</td>
+                    <td>Edit</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
 </div>

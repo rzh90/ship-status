@@ -24,7 +24,7 @@
     <title>Ship Status</title>
 </svelte:head>
 
-<header class="bg-ssdarkgreen p-2">
+<header class="bg-ssdarkgreen p-2 mb-6">
     <div class="mx-auto max-w-screen-xl"> <!-- wrapper -->
         <Nav>
             {#if $page.data.session}
@@ -38,6 +38,6 @@
     </div>
 </header>
 
-<main>
+<div class="container mx-auto max-w-screen-xl">
     <slot />
-</main>
+</div>

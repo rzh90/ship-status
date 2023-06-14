@@ -11,7 +11,7 @@ export const load = async ({ parent }) => {
     }
 
     // fetch data from "todos" database
-    const { data: testTable } = await supabase.from("orders").select("*")
+    const { data: testTable } = await supabase.from("orders").select().eq("user", session.user.id)
     return {
         testTable,
         user: session.user
