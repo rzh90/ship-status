@@ -1,6 +1,8 @@
 import { redirect } from "@sveltejs/kit"
 
-export const load = async ({ parent }) => {
+export const load = async ({ parent, params }) => {
+    const id = params.id
+    
     const { session, supabase } = await parent()
     if (!session) {
         throw redirect(303, "/")
@@ -10,6 +12,7 @@ export const load = async ({ parent }) => {
     const { data: testTable } = await supabase.from("orders").select().eq("user", session.user.id)
     return {
         testTable,
-        user: session.user
+        user: session.user,
+        id
     }
 }

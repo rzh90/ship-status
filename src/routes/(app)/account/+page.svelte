@@ -10,6 +10,8 @@
 
 <p>Hi {user.email}</p>
 
+<a href="/account/add" class="btn variant-filled-primary">Add order</a>
+
 <div class="table-container mt-6">
     <table class="table table-hover">
         <thead>
@@ -36,7 +38,7 @@
                     <td>{#if order.ship_docs} {order.ship_docs} {/if}</td>
                     <td>{#if order.received} Yes {:else} No {/if}</td>
                     <td>{#if order.invoiced} Yes {:else} No {/if}</td>
-                    <td>Edit</td>
+                    <td><a href={`/account/edit/${order.id}`} class="anchor">Edit</a></td>
                 </tr>
             {/each}
         </tbody>

@@ -15,8 +15,6 @@ export const actions = {
                                         .insert({po, customerpo, user})
                                         .select()
 
-        console.log("Order added")
-
-        throw redirect(303, "/account/add")
+        throw redirect(303, "/account")
     }
 }
