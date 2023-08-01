@@ -38,7 +38,7 @@
                         <td>{#if order.ship_date} {order.ship_date} {/if}</td>
                         <td>{#if order.etd} {order.etd} {/if}</td>
                         <td>{#if order.eta} {order.eta} {/if}</td>
-                        <td>{#if order.ship_docs} {order.ship_docs} {/if}</td>
+                        <td>{#if order.ship_docs} Received {:else} Not received {/if}</td>
                         <td>{#if order.received} Yes {:else} No {/if}</td>
                         <td>{#if order.invoiced} Yes {:else} No {/if}</td>
                         <td><a href={`/account/edit/${order.id}`} class="anchor">Edit</a></td>

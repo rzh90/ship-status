@@ -60,16 +60,16 @@
                 <label class="label">
                     <span>Received</span>
                     <select name="received" id="received" class="select">
-                        <option value="false">Not done</option>
-                        <option value="true">Done</option>
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
                     </select>
                 </label>
 
                 <label class="label">
                     <span>Invoiced</span>
                     <select name="invoiced" id="invoiced" class="select">
-                        <option value="false">Not done</option>
-                        <option value="true">Done</option>
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
                     </select>
                 </label>
 

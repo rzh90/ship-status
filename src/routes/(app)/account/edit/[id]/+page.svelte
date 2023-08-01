@@ -24,7 +24,7 @@
 
                     <label class="label">
                         <span>Retailer</span>
-                        <select name="retailer" id="retailer" class="select">
+                        <select name="retailer" id="retailer" class="select" value={order.retailer}>
                             <option value="Burlington">Burlington</option>
                             <option value="Cabelas">Cabela's</option>
                             <option value="Costco US">Costco US</option>
@@ -50,7 +50,7 @@
 
                     <label class="label">
                         <span>Shipping documents</span>
-                        <select name="ship_docs" id="ship_docs" class="select">
+                        <select name="ship_docs" id="ship_docs" class="select" value={order.ship_docs.toString()}>
                             <option value="false">Not received</option>
                             <option value="true">Received</option>
                         </select>
@@ -58,22 +58,22 @@
 
                     <label class="label">
                         <span>Received</span>
-                        <select name="received" id="received" class="select">
-                            <option value="false">Not done</option>
-                            <option value="true">Done</option>
+                        <select name="received" id="received" class="select" value={order.received.toString()}>
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
                         </select>
                     </label>
 
                     <label class="label">
                         <span>Invoiced</span>
-                        <select name="invoiced" id="invoiced" class="select">
-                            <option value="false">Not done</option>
-                            <option value="true">Done</option>
+                        <select name="invoiced" id="invoiced" class="select" value={order.invoiced.toString()}>
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
                         </select>
                     </label>
     
                     <div class="flex gap-2">
-                        <input type="submit" value="Edit" class="btn variant-filled-primary cursor-pointer">
+                        <input type="submit" value="Update" class="btn variant-filled-primary cursor-pointer">
                         <form method="post" action="?/delete">
                             <button type="submit" class="btn variant-ghost-primary">Delete</button>
                         </form>

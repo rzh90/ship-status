@@ -28,11 +28,17 @@
     <div class="mx-auto max-w-screen-xl"> <!-- wrapper -->
         <Nav>
             {#if $page.data.session}
-                <form action="/logout" method="post" use:enhance={handleLogout}>
-                    <button class="btn btn-sm variant-filled-primary" disabled={loading} type="submit">Sign out</button>
-                </form>
+                <div class="flex gap-2">
+                    <a href="/account" class="btn btn-sm variant-filled-primary">Dashboard</a>
+                    <form action="/logout" method="post" use:enhance={handleLogout}>
+                        <button class="btn btn-sm variant-ghost-primary" disabled={loading} type="submit">Sign out</button>
+                    </form>
+                </div>
             {:else}
+            <div class="flex gap-2">
+                <a href="/signup" class="btn btn-sm variant-filled-secondary">Sign up</a>
                 <a href="/signin" class="btn btn-sm variant-filled-primary">Sign in</a>
+            </div>
             {/if}
         </Nav>
     </div>

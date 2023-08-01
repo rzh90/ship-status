@@ -28,7 +28,7 @@
             Check the status of any FOB shipment to determine when it will arrive and when to send the invoice for payment.
         </p>
         <div class="flex flex-wrap gap-3 md:space-x-3 md:block">
-            <a href="/signin" class="btn md:btn-lg w-full md:w-fit variant-ghost-primary">Get started</a>
+            <a href="/signup" class="btn md:btn-lg w-full md:w-fit variant-ghost-primary">Get started</a>
         </div>
     </div>
 </section>
