@@ -7,15 +7,14 @@ export const actions = {
         const session = await getSession()
         const id = params.id
 
+        const user = session.user.id
         const po = formData.get("po")
         const customerpo = formData.get("customerpo")
-        const user = session.user.id
-
+        
         const {data, error} = await supabase
-                                        .from("orders")
-                                        .delete()
-                                        .eq("id", id)
-                                        .select()
+                                    .from("orders")
+                                    .delete()
+                                    .eq("id", id)
                                         
         throw redirect(303, "/account")
     },
@@ -25,11 +24,18 @@ export const actions = {
         const session = await getSession()
         const id = params.id
 
+        const user = session.user.id
         const po = formData.get("po")
         const customerpo = formData.get("customerpo")
-        const user = session.user.id
 
-        console.log("Order edited")
+        const {data, error} = await supabase
+                                    .from("orders")
+                                    .update({
+                                        user,
+                                        po,
+                                        customerpo
+                                    })
+                                    .eq("id", id)
                                         
         throw redirect(303, "/account")
     },
