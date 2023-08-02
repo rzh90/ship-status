@@ -4,19 +4,29 @@
 -->
 <script>
     export let data
-    
     $: ({ testTable, user } = data)
+
+    let selectedOrders = []
 </script>
 
 <p>Hi {user.email}</p>
 
-<a href="/account/add" class="btn variant-filled-primary">Add order</a>
+<div class="mt-4 flex gap-2">
+    <a href="/account/add" class="btn variant-filled-primary">Add</a>
+
+    {#if selectedOrders.length > 0}
+        <form method="post" action="?/delete">
+            <button type="submit" class="btn variant-ghost-primary">Delete</button>
+        </form>
+    {/if}
+</div>
 
 {#if testTable.length}
     <div class="table-container mt-6">
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th></th>
                     <th>PO</th>
                     <th>Customer PO</th>
                     <th>Retailer</th>
@@ -32,6 +42,7 @@
             <tbody>
                 {#each testTable as order}
                     <tr>
+                        <td><input class="checkbox" type="checkbox" value={order.id} bind:group={selectedOrders}></td>
                         <td>{order.po}</td>
                         <td>{order.customerpo}</td>
                         <td>{order.retailer}</td>
