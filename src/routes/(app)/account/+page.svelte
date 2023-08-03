@@ -3,21 +3,43 @@
     Also from https://supabase.com/docs/guides/auth/auth-helpers/sveltekit#server-side-data-fetching-with-rls
 -->
 <script>
+    import { redirect } from "@sveltejs/kit"
+
     export let data
-    $: ({ testTable, user } = data)
+    $: ({ testTable, user, supabase } = data)
 
     let selectedOrders = []
+
+    function toggleSelected(e) {
+        let ids = []
+        for(let element of testTable) {
+            ids.push(element.id)
+        }
+        selectedOrders = e.target.checked ? [...ids] : []
+    }
+
+    async function toggleDelete() {
+        for(let id of selectedOrders) {
+            const {data, error} = await supabase
+                                         .from("orders")
+                                         .delete()
+                                         .eq("id", id)
+        }
+        location.reload()
+    }
 </script>
 
 <p>Hi {user.email}</p>
 
-<div class="mt-4 flex gap-2">
+<div class="mt-4 mb-4 flex items-center gap-2">
     <a href="/account/add" class="btn variant-filled-primary">Add</a>
 
     {#if selectedOrders.length > 0}
         <form method="post" action="?/delete">
-            <button type="submit" class="btn variant-ghost-primary">Delete</button>
+            <button type="submit" class="btn variant-ghost-primary" on:click={toggleDelete}>Delete</button>
         </form>
+
+        <p>{selectedOrders.length} selected</p>
     {/if}
 </div>
 
@@ -26,7 +48,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th></th>
+                    <th><input class="checkbox" type="checkbox" on:change={toggleSelected}></th>
                     <th>PO</th>
                     <th>Customer PO</th>
                     <th>Retailer</th>
@@ -42,7 +64,11 @@
             <tbody>
                 {#each testTable as order}
                     <tr>
-                        <td><input class="checkbox" type="checkbox" value={order.id} bind:group={selectedOrders}></td>
+                        <td>
+                            <form>
+                            <input class="checkbox" type="checkbox" name="selectedOrders" id="selectedOrders" value={order.id} bind:group={selectedOrders}>
+                            </form>
+                        </td>
                         <td>{order.po}</td>
                         <td>{order.customerpo}</td>
                         <td>{order.retailer}</td>

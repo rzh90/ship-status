@@ -14,6 +14,7 @@ export const load = async ({ parent }) => {
     const { data: testTable } = await supabase.from("orders").select().eq("user", session.user.id)
     return {
         testTable,
-        user: session.user
+        user: session.user,
+        supabase
     }
 }
