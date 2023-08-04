@@ -15,6 +15,7 @@ export const load = async ({ parent }) => {
     return {
         testTable,
         user: session.user,
-        supabase
+        supabase,
+        session
     }
 }

@@ -3,10 +3,8 @@
     Also from https://supabase.com/docs/guides/auth/auth-helpers/sveltekit#server-side-data-fetching-with-rls
 -->
 <script>
-    import { redirect } from "@sveltejs/kit"
-
     export let data
-    $: ({ testTable, user, supabase } = data)
+    $: ({ testTable, user, supabase, session } = data)
 
     let selectedOrders = []
 
@@ -18,6 +16,11 @@
         selectedOrders = e.target.checked ? [...ids] : []
     }
 
+    async function getOrders() {
+        const { data } = await supabase.from("orders").select().eq("user", session.user.id)
+        return data
+    }
+
     async function toggleDelete() {
         for(let id of selectedOrders) {
             const {data, error} = await supabase
@@ -25,7 +28,8 @@
                                          .delete()
                                          .eq("id", id)
         }
-        location.reload()
+        testTable = getOrders()
+        selectedOrders = []
     }
 </script>
 
@@ -35,7 +39,7 @@
     <a href="/account/add" class="btn variant-filled-primary">Add</a>
 
     {#if selectedOrders.length > 0}
-        <form method="post" action="?/delete">
+        <form>
             <button type="submit" class="btn variant-ghost-primary" on:click={toggleDelete}>Delete</button>
         </form>
 
