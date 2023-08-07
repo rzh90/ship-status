@@ -4,6 +4,7 @@
 -->
 <script>
     import { ProgressRadial } from "@skeletonlabs/skeleton"
+    import { IconAlertTriangleFilled } from "@tabler/icons-svelte"
 
     export let data
     $: ({ testTable, user, supabase, session } = data)
@@ -48,23 +49,27 @@
 
 <p>Hi {user.email}</p>
 
-<div class="mt-4 mb-4 flex items-center gap-2">
+<section class="mt-4 mb-4 flex items-center gap-2">
     <a href="/account/add" class="btn variant-filled-primary">Add</a>
 
     {#if selectedOrders.length > 0}
-        <form>
-            <button type="submit" class="btn variant-ghost-primary" on:click={toggleDelete}>Delete</button>
-        </form>
+        <button type="submit" class="btn variant-ghost-primary" on:click={toggleDelete}>Delete</button>
 
         <p>{selectedOrders.length} selected</p>
     {/if}
-</div>
+</section>
+
+<section class="mt-4 mb-4">
+    <p>Sort:</p>
+</section>
+
 {#await testTable}
     <ProgressRadial />
 {:then testTable}
     {#if testTable.length}
         {#if shipmentsThisWeek > 0}
             <aside class="alert variant-filled-warning">
+                <div><IconAlertTriangleFilled /></div>
                 <div class="alert-message">
                     <p>
                         {shipmentsThisWeek}
@@ -73,12 +78,13 @@
                         {:else}
                             shipment this week.
                         {/if}
-                    Make sure the ETD/ETA is confirmed!</p>
+                        Make sure the ETD/ETA is confirmed!
+                    </p>
                 </div>
             </aside>
         {/if}
 
-        <div class="table-container mt-6">
+        <section class="table-container mt-6">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -117,7 +123,7 @@
                     {/each}
                 </tbody>
             </table>
-        </div>
+        </section>
 
     {:else}
         <p>No orders yet</p>
