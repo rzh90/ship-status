@@ -12,6 +12,7 @@
     let selectedOrders = []
     const today = new Date()
     let shipmentsThisWeek = 0
+    let selectedSort
 
     function toggleSelected(e) {
         let ids = []
@@ -21,12 +22,22 @@
         selectedOrders = e.target.checked ? [...ids] : []
     }
 
-    async function getOrders() {
-        const { data } = await supabase
+    async function getOrders(sortBy) {
+        if(sortBy) {
+            const { data } = await supabase
                                 .from("orders")
                                 .select()
                                 .eq("user", session.user.id)
-        return data
+                                .order(sortBy)
+            return data
+        }
+        else {
+            const { data } = await supabase
+                                    .from("orders")
+                                    .select()
+                                    .eq("user", session.user.id)
+            return data
+        }
     }
 
     async function toggleDelete() {
@@ -40,6 +51,10 @@
         selectedOrders = []
     }
 
+    function sortOrders() {
+        testTable = getOrders(selectedSort)
+    }
+
     for(let element of data.testTable) {
         let daysLeft = Math.floor((Date.parse(element.ship_date) - today) / (24 * 3600 * 1000))
         if(daysLeft >= 0 && daysLeft <= 7)
@@ -49,18 +64,28 @@
 
 <p>Hi {user.email}</p>
 
-<section class="mt-4 mb-4 flex items-center gap-2">
-    <a href="/account/add" class="btn variant-filled-primary">Add</a>
+<section class="mt-4 mb-4 flex items-center justify-between">
+    <section class="flex items-center gap-2">
+        <a href="/account/add" class="btn variant-filled-primary">Add</a>
 
-    {#if selectedOrders.length > 0}
-        <button type="submit" class="btn variant-ghost-primary" on:click={toggleDelete}>Delete</button>
+        {#if selectedOrders.length > 0}
+            <button type="submit" class="btn variant-ghost-primary" on:click={toggleDelete}>Delete</button>
 
-        <p>{selectedOrders.length} selected</p>
-    {/if}
-</section>
+            <p>{selectedOrders.length} selected</p>
+        {/if}
+    </section>
 
-<section class="mt-4 mb-4">
-    <p>Sort:</p>
+    <section class="flex items-center gap-2">
+        <p>Sort:</p>
+        <form>
+            <select class="select" bind:value={selectedSort} on:change={sortOrders}>
+                <option value="po">PO</option>
+                <option value="customerpo">Customer PO</option>
+                <option value="etd">ETD</option>
+                <option value="eta">ETA</option>
+            </select>
+        </form>
+    </section>
 </section>
 
 {#await testTable}
