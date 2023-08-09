@@ -55,6 +55,7 @@
         testTable = getOrders(selectedSort)
     }
 
+    // find shipments with ship date in less than 7 days
     for(let element of data.testTable) {
         let daysLeft = Math.floor((Date.parse(element.ship_date) - today) / (24 * 3600 * 1000))
         if(daysLeft >= 0 && daysLeft <= 7)
@@ -63,6 +64,23 @@
 </script>
 
 <p>Hi {user.email}</p>
+
+{#if shipmentsThisWeek > 0}
+    <aside class="mt-4 alert variant-filled-warning">
+        <div><IconAlertTriangleFilled /></div>
+        <div class="alert-message">
+            <p>
+                {shipmentsThisWeek}
+                {#if shipmentsThisWeek > 1}
+                    shipments in the next 7 days.
+                {:else}
+                    shipment in the next 7 days.
+                {/if}
+                Make sure the ETD/ETA is confirmed!
+            </p>
+        </div>
+    </aside>
+{/if}
 
 <section class="mt-4 mb-4 flex items-center justify-between">
     <section class="flex items-center gap-2">
@@ -76,40 +94,25 @@
     </section>
 
     <section class="flex items-center gap-2">
-        <p>Sort:</p>
         <form>
             <select class="select" bind:value={selectedSort} on:change={sortOrders}>
+                <option selected disabled>Sort by:</option>
                 <option value="po">PO</option>
                 <option value="customerpo">Customer PO</option>
+                <option value="ship_date">Ship date</option>
                 <option value="etd">ETD</option>
-                <option value="eta">ETA</option>
             </select>
         </form>
     </section>
 </section>
 
 {#await testTable}
-    <ProgressRadial />
+    <div class="flex justify-center">
+        <ProgressRadial />
+    </div>
 {:then testTable}
     {#if testTable.length}
-        {#if shipmentsThisWeek > 0}
-            <aside class="alert variant-filled-warning">
-                <div><IconAlertTriangleFilled /></div>
-                <div class="alert-message">
-                    <p>
-                        {shipmentsThisWeek}
-                        {#if shipmentsThisWeek > 1}
-                            shipments this week.
-                        {:else}
-                            shipment this week.
-                        {/if}
-                        Make sure the ETD/ETA is confirmed!
-                    </p>
-                </div>
-            </aside>
-        {/if}
-
-        <section class="table-container mt-6">
+        <section class="table-container mt-4">
             <table class="table table-hover">
                 <thead>
                     <tr>
