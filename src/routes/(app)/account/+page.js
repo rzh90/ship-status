@@ -10,10 +10,10 @@ export const load = async ({ parent }) => {
         throw redirect(303, "/")
     }
 
-    // fetch data from "todos" database
-    const { data: testTable } = await supabase.from("orders").select().eq("user", session.user.id)
+    // fetch data from database
+    const { data: ordersTable } = await supabase.from("orders").select().eq("user", session.user.id)
     return {
-        testTable,
+        ordersTable,
         user: session.user,
         supabase,
         session

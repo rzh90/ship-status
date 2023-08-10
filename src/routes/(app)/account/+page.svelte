@@ -7,21 +7,23 @@
     import { IconAlertTriangleFilled } from "@tabler/icons-svelte"
 
     export let data
-    $: ({ testTable, user, supabase, session } = data)
+    $: ({ ordersTable, user, supabase, session } = data)
 
     let selectedOrders = []
     const today = new Date()
     let shipmentsThisWeek = 0
     let selectedSort
 
+    // toggle checkbox for selecting multiple items
     function toggleSelected(e) {
         let ids = []
-        for(let element of testTable) {
+        for(let element of ordersTable) {
             ids.push(element.id)
         }
         selectedOrders = e.target.checked ? [...ids] : []
     }
 
+    // get all orders from database and sort them if sort option is selected
     async function getOrders(sortBy) {
         if(sortBy) {
             const { data } = await supabase
@@ -47,16 +49,16 @@
                                          .delete()
                                          .eq("id", id)
         }
-        testTable = getOrders()
+        ordersTable = getOrders()
         selectedOrders = []
     }
 
     function sortOrders() {
-        testTable = getOrders(selectedSort)
+        ordersTable = getOrders(selectedSort)
     }
 
     // find shipments with ship date in less than 7 days
-    for(let element of data.testTable) {
+    for(let element of data.ordersTable) {
         let daysLeft = Math.floor((Date.parse(element.ship_date) - today) / (24 * 3600 * 1000))
         if(daysLeft >= 0 && daysLeft <= 7)
             shipmentsThisWeek++
@@ -65,6 +67,7 @@
 
 <p>Hi {user.email}</p>
 
+<!-- if any shipments are in the next 7 days -->
 {#if shipmentsThisWeek > 0}
     <aside class="mt-4 alert variant-filled-warning">
         <div><IconAlertTriangleFilled /></div>
@@ -82,6 +85,7 @@
     </aside>
 {/if}
 
+<!-- add, delete, and sort options -->
 <section class="mt-4 mb-4 flex items-center justify-between">
     <section class="flex items-center gap-2">
         <a href="/account/add" class="btn variant-filled-primary">Add</a>
@@ -106,12 +110,15 @@
     </section>
 </section>
 
-{#await testTable}
+<!-- load the data -->
+{#await ordersTable}
+<!-- if data is fetching -->
     <div class="flex justify-center">
         <ProgressRadial />
     </div>
-{:then testTable}
-    {#if testTable.length}
+<!-- when data has been fetched -->
+{:then ordersTable}
+    {#if ordersTable.length}
         <section class="table-container mt-4">
             <table class="table table-hover">
                 <thead>
@@ -130,7 +137,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {#each testTable as order}
+                    {#each ordersTable as order}
                         <tr>
                             <td>
                                 <form>
@@ -153,6 +160,7 @@
             </table>
         </section>
 
+    <!-- if no data available -->
     {:else}
         <p>No orders yet</p>
     {/if}

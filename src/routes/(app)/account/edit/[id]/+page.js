@@ -9,9 +9,9 @@ export const load = async ({ parent, params }) => {
     }
 
     // fetch data from "todos" database
-    const { data: testTable } = await supabase.from("orders").select().eq("user", session.user.id)
+    const { data: ordersTable } = await supabase.from("orders").select().eq("user", session.user.id)
     return {
-        testTable,
+        ordersTable,
         user: session.user,
         id
     }

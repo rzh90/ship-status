@@ -6,6 +6,7 @@ export const actions = {
         const formData = await request.formData()
         const session = await getSession()
 
+        // get all form data
         const user = session.user.id
         const po = formData.get("po")
         const customerpo = formData.get("customerpo")

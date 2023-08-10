@@ -1,7 +1,7 @@
 <script>
     export let data
     
-    $: ({ testTable, user, id } = data)
+    $: ({ ordersTable, user, id } = data)
 </script>
 
 <section class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -9,7 +9,7 @@
         <h2 class="h2">Edit order</h2>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            {#each testTable as order}
+            {#each ordersTable as order}
                 {#if order.id == id}
                 <form method="post" action="?/edit" class="space-y-6">
                     <label class="label">

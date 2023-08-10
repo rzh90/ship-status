@@ -5,7 +5,7 @@
 <script>
     export let data
     
-    $: ({ testTable, user } = data)
+    $: ({ ordersTable, user } = data)
 </script>
 
 <section class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
